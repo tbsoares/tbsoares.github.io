@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Um simple espaço para idéias.</title>
-    <link>/</link>
-    <description>Recent content on Um simple espaço para idéias.</description>
+    <title>Aws on Um simple espaço para idéias.</title>
+    <link>/tags/aws/</link>
+    <description>Recent content in Aws on Um simple espaço para idéias.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 07 Mar 2019 19:12:30 -0300</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/aws/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
