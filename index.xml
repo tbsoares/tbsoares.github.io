@@ -17,7 +17,9 @@
       <pubDate>Thu, 07 Mar 2019 19:12:30 -0300</pubDate>
       
       <guid>/posts/cloud-cost-data-transfer-aws/</guid>
-      <description>teste</description>
+      <description>Entender os Custos na AWS com Data Transfer nem sempre é algo trivial, alguns serviços já embutem esse custo no valor do próprio serviço, já em outros o custo com Data Transfer é cobrado separadamente (o que pode esconder o verdadeiro custo com o serviço).
+Em alguns momentos a cobrança do tráfego é só no sentido &amp;ldquo;IN&amp;rdquo;, em outros no &amp;ldquo;Out&amp;rdquo; (e, as vezes, em ambos).
+Quais são possíveis custos com data transfer?</description>
     </item>
     
   </channel>

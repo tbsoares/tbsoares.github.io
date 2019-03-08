@@ -7,7 +7,9 @@
 <meta name="author"
     content="">
 <meta name="description"
-    content="teste" />
+    content="Entender os Custos na AWS com Data Transfer nem sempre é algo trivial, alguns serviços já embutem esse custo no valor do próprio serviço, já em outros o custo com Data Transfer é cobrado separadamente (o que pode esconder o verdadeiro custo com o serviço).
+Em alguns momentos a cobrança do tráfego é só no sentido &amp;ldquo;IN&amp;rdquo;, em outros no &amp;ldquo;Out&amp;rdquo; (e, as vezes, em ambos).
+Quais são possíveis custos com data transfer?" />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="/posts/cloud-cost-data-transfer-aws/" />
@@ -39,12 +41,14 @@
 <link rel="shortcut icon" href="/favicon.ico">
 <meta name="theme-color" content="#252627">
 <meta itemprop="name" content="Entendendo seus custos com Data Transfer na AWS">
-<meta itemprop="description" content="teste">
+<meta itemprop="description" content="Entender os Custos na AWS com Data Transfer nem sempre é algo trivial, alguns serviços já embutem esse custo no valor do próprio serviço, já em outros o custo com Data Transfer é cobrado separadamente (o que pode esconder o verdadeiro custo com o serviço).
+Em alguns momentos a cobrança do tráfego é só no sentido &ldquo;IN&rdquo;, em outros no &ldquo;Out&rdquo; (e, as vezes, em ambos).
+Quais são possíveis custos com data transfer?">
 
 
 <meta itemprop="datePublished" content="2019-03-07T19:12:30-03:00" />
 <meta itemprop="dateModified" content="2019-03-07T19:12:30-03:00" />
-<meta itemprop="wordCount" content="1">
+<meta itemprop="wordCount" content="589">
 
 
 
@@ -53,7 +57,9 @@
 <meta name="twitter:image" content="/"/>
 
 <meta name="twitter:title" content="Entendendo seus custos com Data Transfer na AWS"/>
-<meta name="twitter:description" content="teste"/>
+<meta name="twitter:description" content="Entender os Custos na AWS com Data Transfer nem sempre é algo trivial, alguns serviços já embutem esse custo no valor do próprio serviço, já em outros o custo com Data Transfer é cobrado separadamente (o que pode esconder o verdadeiro custo com o serviço).
+Em alguns momentos a cobrança do tráfego é só no sentido &ldquo;IN&rdquo;, em outros no &ldquo;Out&rdquo; (e, as vezes, em ambos).
+Quais são possíveis custos com data transfer?"/>
 
 
 
@@ -69,7 +75,7 @@
 
     </head>
 
-    <body class="dark-theme">
+    <body class="">
         <div class="container">
             <header class="header">
     <span class="header__inner">
@@ -115,7 +121,7 @@
     <main class="post">
 
         <div class="post-info">
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>One minute
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>3 minutes
 
             
 
@@ -128,7 +134,78 @@
             
 
             <div class="post-content">
-                <p>teste</p>
+                
+
+<p>Entender os Custos na AWS com Data Transfer nem sempre é algo trivial, alguns serviços já embutem esse custo no valor do próprio serviço, já em outros o custo com Data Transfer é cobrado separadamente (o que pode esconder o verdadeiro custo com o serviço).</p>
+
+<p>Em alguns momentos a cobrança do tráfego é só no sentido &ldquo;IN&rdquo;, em outros no &ldquo;Out&rdquo; (e, as vezes, em ambos).</p>
+
+<h3 id="quais-são-possíveis-custos-com-data-transfer">Quais são possíveis custos com data transfer?</h3>
+
+<p>Quando há transferência de dados da seguinte espécie:</p>
+
+<p>1) Entre AWS e a internet.</p>
+
+<p>2) Entre os serviços, dentro da própria AWS.</p>
+
+<h4 id="1-entre-aws-e-a-internet">1) Entre AWS e a internet</h4>
+
+<p>Aqui, pelo menos, é simples. Se o dado está indo DA AWS para a Internet (<code>Data Transfer Out</code> - download por parte de um usuário) <strong>existe cobrança</strong> por GB trafegado e o custo varia de acordo com o serviço (EC2, S3, etc) e a região de origem. Se o dado estiver indo DA Internet para AWS (<code>Data transfer IN</code> - upload de algum tipo) <strong>não há cobrança</strong>.</p>
+
+<h4 id="2-entre-os-serviços-dentro-da-própria-aws">2) Entre os serviços, dentro da própria AWS</h4>
+
+<p>Aqui as coisas ficam mais complicadas. Existem duas &ldquo;macro&rdquo; variações, se a troca de dados ocorrem <strong>ENTRE</strong> Regiões (São Paulo -&gt; Virginia) ou na dentro da <strong>MESMA</strong> região (Virginia -&gt; Virginia).</p>
+
+<h5 id="transferência-de-dados-entre-regiões-p-ex-são-paulo-virginia">Transferência de dados <code>ENTRE</code> Regiões (p.ex. São Paulo -&gt; Virginia)</h5>
+
+<p>O custo entre Regiões tem o mesmo perfil que entre a AWS e a Internet. Os custos variam para cada GB trafegados em cada região, mas os custos são cobrados somente em uma direção.</p>
+
+<p>Por exemplo, se uma transferência for realizada de São Paulo -&gt; Virginia, a cobrança será somente de <em>Data Transfer Out</em> em São Paulo, o <em>Data Transfer IN</em> da Virginia não será cobrado.</p>
+
+<h5 id="transferência-de-dados-na-mesma-região-p-ex-virginia-virginia">Transferência de dados na <code>MESMA</code> Região (p.ex. Virginia -&gt; Virginia)</h5>
+
+<p>Quando na mesma região, o custo (e mesmo se ele é cobrado ou não) da transferência de dados varia se acontecer na mesma AZ (availability zone) ou se acontecer <strong>ENTRE</strong> AZ&rsquo;s (sim, alta disponibilidade custa mais caro).</p>
+
+<p>Transferêcia de dados na <strong>MESMA</strong> Região e <strong>MESMA</strong> AZ, se utilizar o IP Privado, <code>não tem custo</code>!</p>
+
+<p>Transferêcia de dados na <strong>MESMA</strong> Região e <strong>ENTRE</strong> AZ&rsquo;s (se um serviço utilizar EC2 em mais de uma AZ ou um RDS com alta disponibilidade, por exemplo) <code>tem custo</code>.</p>
+
+<p>Uma imagem para ajudar a entender (custo do ponto de vista de uma EC2):</p>
+
+<p><img src="/images/data-transfer-example-1.png" alt="Data Transfer Cost" width="700" /></p>
+
+<h3 id="dicas-para-economizar">Dicas para economizar</h3>
+
+<ol>
+<li><p>Planeje sua Aquitetura!</p>
+
+<ul>
+<li>Os custos são <strong>mais caros</strong> quando o tráfego passa pela Internet ou ENTRE regiões.</li>
+<li>O <em>segundo mais caro</em> é entre AZ&rsquo;s.</li>
+
+<li><p>O <strong>menor custo</strong> é dentro da mesma AZ (<code>lembre-se da alta disponibilidade</code>).</p></li>
+
+<li><p>Planeje desenhando sua arquitetura para minimizar os custos com o tráfego de dados. Se uma aplicação não for crítica (puder ser reconstruída, não haver perda de dados significativos, etc), será que ela precisa ser Multi-AZ?</p></li>
+
+<li><p>Cuidado redobrado quando desenhar soluções envolvendo <em>EC2</em> e <em>S3</em>. Na mesma região o Data Transfer da <em>EC2</em> <strong>PARA</strong> <em>S3</em> <code>não tem custo</code>, porém o <code>contrario sim</code>!</p></li>
+
+<li><p>Sobre o S3, Data transfer IN <strong>PARA</strong> <em>S3</em> da Internet não tem custo. Data transfer Out <strong>PARA</strong> <em>CloudFront</em>, também não tem custo.</p></li>
+</ul></li>
+
+<li><p>Use o CloudFront sempre que possível</p>
+
+<ul>
+<li>O Data Transfer do CloudFront é um dos <strong>mais baratos</strong>. Use sempre que algum serviço fizer interface com o usuário.</li>
+<li>Mesmo que o serviço não utilize cache de nenhuma forma, o CloudFront deve ser utilizado.</li>
+<li>O custo de GB/$ do CloudFront é mais barato que EC2, LoadBalancer e APIGateway.</li>
+</ul></li>
+
+<li><p>Entre serviços, use IP Privado</p>
+
+<ul>
+<li>Se estver na <em>mesma região</em> e na <em>mesma AZ</em>, porém utilizar um IP Público, <strong><code>pagará</code></strong> Data Transfer!</li>
+</ul></li>
+</ol>
 
             </div>
         </article>
@@ -140,7 +217,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="/tags/cost">cost</a></span><span class="tag"><a href="/tags/aws">aws</a></span><span class="tag"><a href="/tags/cloud">cloud</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>One Word</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>589 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-03-07 19:12 -0300</p>
         </div>

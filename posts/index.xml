@@ -15,8 +15,81 @@
             <pubDate>Thu, 07 Mar 2019 19:12:30 -0300</pubDate>
             
             <guid>/posts/cloud-cost-data-transfer-aws/</guid>
-            <description>teste</description>
-            <content type="html"><![CDATA[<p>teste</p>
+            <description>Entender os Custos na AWS com Data Transfer nem sempre é algo trivial, alguns serviços já embutem esse custo no valor do próprio serviço, já em outros o custo com Data Transfer é cobrado separadamente (o que pode esconder o verdadeiro custo com o serviço).
+Em alguns momentos a cobrança do tráfego é só no sentido &amp;ldquo;IN&amp;rdquo;, em outros no &amp;ldquo;Out&amp;rdquo; (e, as vezes, em ambos).
+Quais são possíveis custos com data transfer?</description>
+            <content type="html"><![CDATA[
+
+<p>Entender os Custos na AWS com Data Transfer nem sempre é algo trivial, alguns serviços já embutem esse custo no valor do próprio serviço, já em outros o custo com Data Transfer é cobrado separadamente (o que pode esconder o verdadeiro custo com o serviço).</p>
+
+<p>Em alguns momentos a cobrança do tráfego é só no sentido &ldquo;IN&rdquo;, em outros no &ldquo;Out&rdquo; (e, as vezes, em ambos).</p>
+
+<h3 id="quais-são-possíveis-custos-com-data-transfer">Quais são possíveis custos com data transfer?</h3>
+
+<p>Quando há transferência de dados da seguinte espécie:</p>
+
+<p>1) Entre AWS e a internet.</p>
+
+<p>2) Entre os serviços, dentro da própria AWS.</p>
+
+<h4 id="1-entre-aws-e-a-internet">1) Entre AWS e a internet</h4>
+
+<p>Aqui, pelo menos, é simples. Se o dado está indo DA AWS para a Internet (<code>Data Transfer Out</code> - download por parte de um usuário) <strong>existe cobrança</strong> por GB trafegado e o custo varia de acordo com o serviço (EC2, S3, etc) e a região de origem. Se o dado estiver indo DA Internet para AWS (<code>Data transfer IN</code> - upload de algum tipo) <strong>não há cobrança</strong>.</p>
+
+<h4 id="2-entre-os-serviços-dentro-da-própria-aws">2) Entre os serviços, dentro da própria AWS</h4>
+
+<p>Aqui as coisas ficam mais complicadas. Existem duas &ldquo;macro&rdquo; variações, se a troca de dados ocorrem <strong>ENTRE</strong> Regiões (São Paulo -&gt; Virginia) ou na dentro da <strong>MESMA</strong> região (Virginia -&gt; Virginia).</p>
+
+<h5 id="transferência-de-dados-entre-regiões-p-ex-são-paulo-virginia">Transferência de dados <code>ENTRE</code> Regiões (p.ex. São Paulo -&gt; Virginia)</h5>
+
+<p>O custo entre Regiões tem o mesmo perfil que entre a AWS e a Internet. Os custos variam para cada GB trafegados em cada região, mas os custos são cobrados somente em uma direção.</p>
+
+<p>Por exemplo, se uma transferência for realizada de São Paulo -&gt; Virginia, a cobrança será somente de <em>Data Transfer Out</em> em São Paulo, o <em>Data Transfer IN</em> da Virginia não será cobrado.</p>
+
+<h5 id="transferência-de-dados-na-mesma-região-p-ex-virginia-virginia">Transferência de dados na <code>MESMA</code> Região (p.ex. Virginia -&gt; Virginia)</h5>
+
+<p>Quando na mesma região, o custo (e mesmo se ele é cobrado ou não) da transferência de dados varia se acontecer na mesma AZ (availability zone) ou se acontecer <strong>ENTRE</strong> AZ&rsquo;s (sim, alta disponibilidade custa mais caro).</p>
+
+<p>Transferêcia de dados na <strong>MESMA</strong> Região e <strong>MESMA</strong> AZ, se utilizar o IP Privado, <code>não tem custo</code>!</p>
+
+<p>Transferêcia de dados na <strong>MESMA</strong> Região e <strong>ENTRE</strong> AZ&rsquo;s (se um serviço utilizar EC2 em mais de uma AZ ou um RDS com alta disponibilidade, por exemplo) <code>tem custo</code>.</p>
+
+<p>Uma imagem para ajudar a entender (custo do ponto de vista de uma EC2):</p>
+
+<p><img src="/images/data-transfer-example-1.png" alt="Data Transfer Cost" width="700" /></p>
+
+<h3 id="dicas-para-economizar">Dicas para economizar</h3>
+
+<ol>
+<li><p>Planeje sua Aquitetura!</p>
+
+<ul>
+<li>Os custos são <strong>mais caros</strong> quando o tráfego passa pela Internet ou ENTRE regiões.</li>
+<li>O <em>segundo mais caro</em> é entre AZ&rsquo;s.</li>
+
+<li><p>O <strong>menor custo</strong> é dentro da mesma AZ (<code>lembre-se da alta disponibilidade</code>).</p></li>
+
+<li><p>Planeje desenhando sua arquitetura para minimizar os custos com o tráfego de dados. Se uma aplicação não for crítica (puder ser reconstruída, não haver perda de dados significativos, etc), será que ela precisa ser Multi-AZ?</p></li>
+
+<li><p>Cuidado redobrado quando desenhar soluções envolvendo <em>EC2</em> e <em>S3</em>. Na mesma região o Data Transfer da <em>EC2</em> <strong>PARA</strong> <em>S3</em> <code>não tem custo</code>, porém o <code>contrario sim</code>!</p></li>
+
+<li><p>Sobre o S3, Data transfer IN <strong>PARA</strong> <em>S3</em> da Internet não tem custo. Data transfer Out <strong>PARA</strong> <em>CloudFront</em>, também não tem custo.</p></li>
+</ul></li>
+
+<li><p>Use o CloudFront sempre que possível</p>
+
+<ul>
+<li>O Data Transfer do CloudFront é um dos <strong>mais baratos</strong>. Use sempre que algum serviço fizer interface com o usuário.</li>
+<li>Mesmo que o serviço não utilize cache de nenhuma forma, o CloudFront deve ser utilizado.</li>
+<li>O custo de GB/$ do CloudFront é mais barato que EC2, LoadBalancer e APIGateway.</li>
+</ul></li>
+
+<li><p>Entre serviços, use IP Privado</p>
+
+<ul>
+<li>Se estver na <em>mesma região</em> e na <em>mesma AZ</em>, porém utilizar um IP Público, <strong><code>pagará</code></strong> Data Transfer!</li>
+</ul></li>
+</ol>
 ]]></content>
         </item>
         
