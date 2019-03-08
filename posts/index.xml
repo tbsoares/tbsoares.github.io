@@ -17,12 +17,14 @@
             <guid>/posts/cloud-cost-data-transfer-aws/</guid>
             <description>Entender os Custos na AWS com Data Transfer nem sempre é algo trivial, alguns serviços já embutem esse custo no valor do próprio serviço, já em outros o custo com Data Transfer é cobrado separadamente (o que pode esconder o verdadeiro custo com o serviço).
 Em alguns momentos a cobrança do tráfego é só no sentido &amp;ldquo;IN&amp;rdquo;, em outros no &amp;ldquo;Out&amp;rdquo; (e, as vezes, em ambos).
-Quais são possíveis custos com data transfer?</description>
+Vamos ver onde a cobrança com Data Transfer é feita e algumas dicas que podem te ajudar.</description>
             <content type="html"><![CDATA[
 
 <p>Entender os Custos na AWS com Data Transfer nem sempre é algo trivial, alguns serviços já embutem esse custo no valor do próprio serviço, já em outros o custo com Data Transfer é cobrado separadamente (o que pode esconder o verdadeiro custo com o serviço).</p>
 
 <p>Em alguns momentos a cobrança do tráfego é só no sentido &ldquo;IN&rdquo;, em outros no &ldquo;Out&rdquo; (e, as vezes, em ambos).</p>
+
+<p>Vamos ver onde a cobrança com Data Transfer é feita e algumas dicas que podem te ajudar.</p>
 
 <h3 id="quais-são-possíveis-custos-com-data-transfer">Quais são possíveis custos com data transfer?</h3>
 
@@ -50,7 +52,7 @@ Quais são possíveis custos com data transfer?</description>
 
 <p>Quando na mesma região, o custo (e mesmo se ele é cobrado ou não) da transferência de dados varia se acontecer na mesma AZ (availability zone) ou se acontecer <strong>ENTRE</strong> AZ&rsquo;s (sim, alta disponibilidade custa mais caro).</p>
 
-<p>Transferêcia de dados na <strong>MESMA</strong> Região e <strong>MESMA</strong> AZ, se utilizar o IP Privado, <code>não tem custo</code>!</p>
+<p>Transferêcia de dados na <strong>MESMA</strong> Região e <strong>MESMA</strong> AZ, <strong>se utilizar o IP Privado</strong>, <code>não tem custo</code>!</p>
 
 <p>Transferêcia de dados na <strong>MESMA</strong> Região e <strong>ENTRE</strong> AZ&rsquo;s (se um serviço utilizar EC2 em mais de uma AZ ou um RDS com alta disponibilidade, por exemplo) <code>tem custo</code>.</p>
 

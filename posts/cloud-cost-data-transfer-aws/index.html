@@ -9,7 +9,7 @@
 <meta name="description"
     content="Entender os Custos na AWS com Data Transfer nem sempre é algo trivial, alguns serviços já embutem esse custo no valor do próprio serviço, já em outros o custo com Data Transfer é cobrado separadamente (o que pode esconder o verdadeiro custo com o serviço).
 Em alguns momentos a cobrança do tráfego é só no sentido &amp;ldquo;IN&amp;rdquo;, em outros no &amp;ldquo;Out&amp;rdquo; (e, as vezes, em ambos).
-Quais são possíveis custos com data transfer?" />
+Vamos ver onde a cobrança com Data Transfer é feita e algumas dicas que podem te ajudar." />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="/posts/cloud-cost-data-transfer-aws/" />
@@ -43,12 +43,12 @@ Quais são possíveis custos com data transfer?" />
 <meta itemprop="name" content="Entendendo seus custos com Data Transfer na AWS">
 <meta itemprop="description" content="Entender os Custos na AWS com Data Transfer nem sempre é algo trivial, alguns serviços já embutem esse custo no valor do próprio serviço, já em outros o custo com Data Transfer é cobrado separadamente (o que pode esconder o verdadeiro custo com o serviço).
 Em alguns momentos a cobrança do tráfego é só no sentido &ldquo;IN&rdquo;, em outros no &ldquo;Out&rdquo; (e, as vezes, em ambos).
-Quais são possíveis custos com data transfer?">
+Vamos ver onde a cobrança com Data Transfer é feita e algumas dicas que podem te ajudar.">
 
 
 <meta itemprop="datePublished" content="2019-03-07T19:12:30-03:00" />
 <meta itemprop="dateModified" content="2019-03-07T19:12:30-03:00" />
-<meta itemprop="wordCount" content="589">
+<meta itemprop="wordCount" content="606">
 
 
 
@@ -59,7 +59,7 @@ Quais são possíveis custos com data transfer?">
 <meta name="twitter:title" content="Entendendo seus custos com Data Transfer na AWS"/>
 <meta name="twitter:description" content="Entender os Custos na AWS com Data Transfer nem sempre é algo trivial, alguns serviços já embutem esse custo no valor do próprio serviço, já em outros o custo com Data Transfer é cobrado separadamente (o que pode esconder o verdadeiro custo com o serviço).
 Em alguns momentos a cobrança do tráfego é só no sentido &ldquo;IN&rdquo;, em outros no &ldquo;Out&rdquo; (e, as vezes, em ambos).
-Quais são possíveis custos com data transfer?"/>
+Vamos ver onde a cobrança com Data Transfer é feita e algumas dicas que podem te ajudar."/>
 
 
 
@@ -140,6 +140,8 @@ Quais são possíveis custos com data transfer?"/>
 
 <p>Em alguns momentos a cobrança do tráfego é só no sentido &ldquo;IN&rdquo;, em outros no &ldquo;Out&rdquo; (e, as vezes, em ambos).</p>
 
+<p>Vamos ver onde a cobrança com Data Transfer é feita e algumas dicas que podem te ajudar.</p>
+
 <h3 id="quais-são-possíveis-custos-com-data-transfer">Quais são possíveis custos com data transfer?</h3>
 
 <p>Quando há transferência de dados da seguinte espécie:</p>
@@ -166,7 +168,7 @@ Quais são possíveis custos com data transfer?"/>
 
 <p>Quando na mesma região, o custo (e mesmo se ele é cobrado ou não) da transferência de dados varia se acontecer na mesma AZ (availability zone) ou se acontecer <strong>ENTRE</strong> AZ&rsquo;s (sim, alta disponibilidade custa mais caro).</p>
 
-<p>Transferêcia de dados na <strong>MESMA</strong> Região e <strong>MESMA</strong> AZ, se utilizar o IP Privado, <code>não tem custo</code>!</p>
+<p>Transferêcia de dados na <strong>MESMA</strong> Região e <strong>MESMA</strong> AZ, <strong>se utilizar o IP Privado</strong>, <code>não tem custo</code>!</p>
 
 <p>Transferêcia de dados na <strong>MESMA</strong> Região e <strong>ENTRE</strong> AZ&rsquo;s (se um serviço utilizar EC2 em mais de uma AZ ou um RDS com alta disponibilidade, por exemplo) <code>tem custo</code>.</p>
 
@@ -217,7 +219,7 @@ Quais são possíveis custos com data transfer?"/>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="/tags/cost">cost</a></span><span class="tag"><a href="/tags/aws">aws</a></span><span class="tag"><a href="/tags/cloud">cloud</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>589 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>606 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-03-07 19:12 -0300</p>
         </div>
